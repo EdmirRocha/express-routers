@@ -1,25 +1,22 @@
 'use strict';
 
 var express = require('express');
-
 var app = express();
-
-var controllers = require('./controllers');
-
-// console.log(controllers);
-
-app
-	.route('/users')
-	.get(controllers.users.list)
- 	.post(controllers.users.create);
+var routers = require('./routers/index.js');
 
 
-app
-	.route('/users/:id')
-	.get(controllers.users.get)
-	.put(controllers.users.update)
-	.delete(controllers.users.delete);
+app.use('/api', routers.api);
 
+// vat api = require('../api.js');
+// vat pages = require('../pages.js');
+// vat admin = require('../admin.js');
+
+// // console.log(controllers);
+
+// app.use('/', api)
+// app.use('/api', api);
+// app.use('/admin', pages);
+// app.use('/', pages);
 
 
 app.listen(3000, serverLogInit);

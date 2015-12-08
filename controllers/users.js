@@ -1,5 +1,7 @@
 'use strict';
 
+let Users = require('../models/index.js').users;
+
 module.exports = {
 	list: list,
 	create: create,
@@ -10,17 +12,16 @@ module.exports = {
 
 function list (req, res) {
 
-	var users = [
-		{name: 'Edmir'},
-		{name: 'Mirtis'}
-	];
-
-	res.json(users);  //.statust default = 200
-		
-}
+	Users
+		.find({})
+		.then(function(users) {
+			res.json(users);  //.statust default = 200
+		}
+	)};
 
 
 function create (req,res) {
+	console.log(req.body)
 	res
 		.status(201)
 		.json({message: 'created'});

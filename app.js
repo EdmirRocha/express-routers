@@ -3,27 +3,30 @@
 var express = require('express');
 var app = express();
 var routers = require('./routers/index.js');
+let config = require('./config.js');
+let mongoose = require('mongoose');
 
 
 app.use('/api', routers.api);
 
-// vat api = require('../api.js');
-// vat pages = require('../pages.js');
-// vat admin = require('../admin.js');
-
-// // console.log(controllers);
-
-// app.use('/', api)
-// app.use('/api', api);
-// app.use('/admin', pages);
-// app.use('/', pages);
+let urlDatabase = `mongodb://${config.db.host}/${config.db.name}`;
 
 
-app.listen(3000, serverLogInit);
+mongoose.connect(urlDatabase);
+
+mongoose.connection.on('error', function() {
+	console.log('database connection error');
+});
+
+mongoose.connection.once('open', function() {
+	app.listen(3000, serverLogInit);
+});
+
+
 
 function serverLogInit() { 
 
-	console.log(process.env.NODE_ENV);
+	// console.log(process.env.NODE_ENV);
 
 	if (process.env.NODE_ENV == 'producao'){
 		console.log('sim');

@@ -5,7 +5,7 @@ let mongoose = require('mongoose');
 
 let schema = new Schema({
 	firstname: {type: String, required: true},
-	enail: {type: String, required: true, unique: true},
+	email: {type: String, required: true, unique: true},
 	createdAt: {type: Date, set: Date.now}
 });
 

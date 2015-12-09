@@ -6,10 +6,12 @@ var router = new Router();
 
 var controllers = require('../controllers');
 let bodyParser = require('body-parser');
+let multer = require('multer')();
 
 
 router.use(bodyParser.urlencoded({extended: false}));
 router.use(bodyParser.json());
+router.use(multer.array());
 
 
 router

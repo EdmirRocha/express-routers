@@ -20,22 +20,36 @@ function list (req, res) {
 	)};
 
 
-function create (req,res) {
-	console.log(req.body)
-	res
-		.status(201)
-		.json({message: 'created'});
+function create(req, res) {
+  let user = new Users(req.body);
+
+  let success = function(status) {
+    console.log(status);
+     res
+      .status(201)
+      .json({
+        message: 'created'
+      });
+  };
+
+  let error = function(err) {
+    console.log(err);
+    res.status(400).json({
+      message: 'algo errado'
+    });
+  };
+
+  user
+    .save()
+    .then(success, error);
 }
 
-function get (req, res) {
-
-	// console.log(req.params)
-
-	var user = [
-		{name: 'Mirtis'}
-	];
-
-	res.json(user);
+function get(req, res) {
+  Users
+    .findById(req.params.id)
+    .then(function(user) {
+      res.json(user);
+    });
 }
 
 function update (req, res) {

@@ -7,6 +7,9 @@ let config = {
 			port: 27017,
 			name: 'test_application'
 		}
+		// ,
+		// secret: 'cccccc',
+		// token: {{expiresIn: 7d'}}
 	},
 	production: {
 		db: {
